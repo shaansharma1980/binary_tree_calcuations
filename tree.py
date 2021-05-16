@@ -13,11 +13,28 @@ class Node:
         self.left = None
         self.right = None
 
+    def search(self, target):
+        if self.data == target:
+            print('Found the value')
+            return self
+
+        if self.left and self.data > target:
+            return self.left.search(target)
+
+        if self.right and self.data < target:
+            return self.right.search(target)
+
+        print('Target value not found')
+
+
 
 class Tree:
     def __init__(self, root, name=''):
         self.root = root
         self.name = name
+
+    def search(self, target):
+        return self.root.search(target)
 
 node = Node(10)
 
@@ -38,3 +55,6 @@ myTree = Tree(node, 'Shantanu\'s Tree')
 
 print(myTree.root.right.left.data)
 print(myTree.root.left.right.data)
+
+found = myTree.search(10000)
+print(found.data)
